@@ -42,24 +42,24 @@ public class Application {
 
             System.out.println(String.format("Load some fixture data %s", dbUrl));
 
-            System.out.println(String.format("Items in DB %d", repo.count()));
+            System.out.println(String.format("Hosen in DB %d", repo.count()));
 
             if (repo.count() == 0) {
-                repo.findAll().forEach(item -> System.out.println(String.format("item: %s", item.getName())));
+                repo.findAll().forEach(item -> System.out.println(String.format("hosen: %s", item.getName())));
 
                 Stream.of(1, 2, 3).forEach(i -> {
-                    System.out.println(String.format("Adding item%d", i));
-                    repo.save(new Item(String.format("item%d", i), String.format("we have the best items, item%d", i)));
+                    System.out.println(String.format("Adding hosen%d", i));
+                    repo.save(new Item(String.format("hosen%d", i), String.format("we have the best hosen, hosen%d", i)));
                 });
 
-                System.out.println(String.format("Items in DB %d", repo.count()));
-                repo.findAll().forEach(item -> System.out.println(String.format("item: %s", item.getName())));
+                System.out.println(String.format("Hosen in DB %d", repo.count()));
+                repo.findAll().forEach(item -> System.out.println(String.format("hose: %s", item.getName())));
             }
 
             System.out.println(String.format("Users in DB %d", userRepo.count()));
 
             if (userRepo.count() == 0) {
-                userRepo.findAll().forEach(item -> System.out.println(String.format("item: %s", item.getName())));
+                userRepo.findAll().forEach(item -> System.out.println(String.format("hosen: %s", item.getName())));
 
                 TenantContext.setCurrentTenant("1234567");
                 Stream.of(1, 2, 3).forEach(i -> {
@@ -75,7 +75,7 @@ public class Application {
                 });
 
 
-                System.out.println(String.format("Items in DB %d", userRepo.count()));
+                System.out.println(String.format("Hosen in DB %d", userRepo.count()));
                 userRepo.findAll().forEach(item -> System.out.println(String.format("user: %s", item.getName())));
             }
 
