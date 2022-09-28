@@ -1,11 +1,25 @@
 app:
   applicationId: ${APP_ID:44d63acb-a50b-4ab5-baa3-9508bb12691f}
-  env: ${APP_ENV:custom-test}
+  env: ${APP_ENV:custom-params}
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
-#  openApiConf:
-#    path: /openapi
+  openApiConf:
+    path: /openapi
+    fakerEnabled: true #turn on the faker library to generate custom data
+    includeAllMethods: true # turns on Deletes which is off by default
+    customVariables:
+      - field: text
+        values:
+          - "pants"
+          - "hosen"
+      - field: searchText
+        values:
+          - "The Best"
+      - field: username
+        values:
+          - $faker:email
+
   authentication:
     usernamePassword:
       type: JSON
@@ -28,16 +42,8 @@ app:
     loggedOutIndicator: ".*Location:.*/login.*"
 
 hawk:
-  spider:
-    base: false
-    postmanConfig:
-      filePath: javaspringvulny_postman_collection.json
   failureThreshold: high
+
 hawkAddOn:
-  scripts:
-    - name: api1:2019-tennant-check.js
-      id: 1000012
-      type: active
-      path: stackhawk.d
-      language: JAVASCRIPT
   spider: false
+  maxDurationMinutes: 10

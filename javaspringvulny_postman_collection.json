@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "de483569-ba3b-449e-9688-e68dd4c2f743",
+		"_postman_id": "cd697cea-2507-461b-a6b9-9bad4fab75c6",
 		"name": "Postman Collection for JavaSpringVulny",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "305641"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -17,6 +16,9 @@
 							"item": [
 								{
 									"name": "search All",
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
 									"request": {
 										"method": "GET",
 										"header": [
@@ -144,6 +146,47 @@
 											"body": "ea nisi venia"
 										}
 									]
+								},
+								{
+									"name": "bad",
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInRlbmFudElkIjoiMTIzNDU2NyIsImlhdCI6MTY2Mzk1NDY4OSwiZXhwIjoxNjYzOTU4Mjg5fQ.dnCsM7wKsasVj-rTtj_rffMDfVlOZxoQziE6VKpv0D4",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/jwt/users/search/bad/:text",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"jwt",
+												"users",
+												"search",
+												"bad",
+												":text"
+											],
+											"variable": [
+												{
+													"key": "text",
+													"value": "user"
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
@@ -362,6 +405,9 @@
 						},
 						{
 							"name": "signin",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
 							"request": {
 								"method": "POST",
 								"header": [
@@ -711,6 +757,36 @@
 					]
 				}
 			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInRlbmFudElkIjoiMTIzNDU2NyIsImlhdCI6MTY2Mzk1MzM2OCwiZXhwIjoxNjYzOTU2OTY4fQ.UzEiOz6MvfyN4-JSA23ue_xtGSkqtbNW5kpiFGCh_F4",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
