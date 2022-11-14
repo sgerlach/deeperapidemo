@@ -46,7 +46,6 @@ app:
 hawk:
   failureThreshold: high
   spider: false
-    maxDurationMinutes: 10
 
 hawkAddOn:
   scripts:
