@@ -45,7 +45,8 @@ app:
 
 hawk:
   failureThreshold: high
-  spider: false
+  spider:
+    base: false
 
 hawkAddOn:
   scripts:
