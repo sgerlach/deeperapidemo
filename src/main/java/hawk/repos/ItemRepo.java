@@ -5,6 +5,7 @@ import hawk.form.Search;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ItemRepo extends CrudRepository<Item, Long> {

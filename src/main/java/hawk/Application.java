@@ -1,6 +1,8 @@
 package hawk;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.stream.Stream;
 
 import hawk.context.TenantContext;
@@ -49,7 +51,7 @@ public class Application {
 
                 Stream.of(1, 2, 3).forEach(i -> {
                     System.out.println(String.format("Adding hosen%d", i));
-                    repo.save(new Item(String.format("hosen%d", i), String.format("we have the best hosen, hosen%d", i)));
+                    repo.save(new Item(String.format("hosen%d", i), String.format("we have the best hosen, hosen%d", i), BigDecimal.valueOf(9.89)));
                 });
 
                 System.out.println(String.format("Hosen in DB %d", repo.count()));

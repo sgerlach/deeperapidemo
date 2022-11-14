@@ -30,7 +30,7 @@ public class SearchService {
             public List<Item> execute(Connection connection) throws SQLException {
                 List<Item> items = new ArrayList<>();
                 // The wrong way
-                String query = "select id, name, description from ITEM where description like '%" +
+                String query = "select id, name, description, price from ITEM where description like '%" +
                         search.getSearchText() + "%'";
 
                 LOGGER.log(Level.INFO, "SQL Query {0}",  query);
@@ -47,7 +47,8 @@ public class SearchService {
                 */
 
                 while (rs.next()) {
-                    items.add(new Item(rs.getLong("id"), rs.getString("name"), rs.getString("description")));
+                    items.add(new Item(rs.getLong("id"), rs.getString("name"),
+                            rs.getString("description"), rs.getBigDecimal("price")));
                 }
                 rs.close();
                 return items;

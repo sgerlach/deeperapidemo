@@ -15,7 +15,7 @@ app:
           - "hosen"
       - field: searchText
         values:
-          - "The Best"
+          - "best"
       - field: username
         values:
           - $faker:email
@@ -41,9 +41,17 @@ app:
     loggedInIndicator: "\\QSign Out\\E"
     loggedOutIndicator: ".*Location:.*/login.*"
 
+
+
 hawk:
   failureThreshold: high
 
 hawkAddOn:
   spider: false
   maxDurationMinutes: 10
+  scripts:
+    - name: api1:2019-tennant-check.js
+      id: 1000012
+      type: active
+      path: stackhawk.d
+      language: JAVASCRIPT
