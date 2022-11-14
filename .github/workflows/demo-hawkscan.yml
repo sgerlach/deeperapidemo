@@ -15,7 +15,7 @@ jobs:
         uses: stackhawk/hawkscan-action@v2.0.0
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
-          configurationFiles: stackhawk.d/stackhawk-custom-params.yml stackhawk-github-pr.yml
+          configurationFiles: stackhawk.d/stackhawk-custom-params.yml stackhawk.d/stackhawk-github-pr.yml
         env:
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           BRANCH_NAME: ${{ github.head_ref }}
