@@ -24,13 +24,13 @@ public class UserSearchService {
 
     public List<User> search(Search search) {
         final Session session = entityManager.unwrap(Session.class);
-        return session.doReturningWork(connection -> {
+        List users = session.doReturningWork(connection -> {
             List<User> users1 = new ArrayList<>();
             // The wrong way
             String query = "select id, name, description, tenant_id from public.user where name like '%" +
                     search.getSearchText() + "%'";
 
-            LOGGER.log(Level.INFO, "SQL Query {0}",  query);
+            LOGGER.log(Level.INFO, "SQL Query " + query);
             ResultSet rs = connection
                     .createStatement()
                     .executeQuery(query);
@@ -39,13 +39,14 @@ public class UserSearchService {
             String query = "select id, name, description from ITEM where description like ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, "%" + search.getSearchText() + "%");
-            LOGGER.log(Level.INFO, "SQL Query {0}", statement);
+            LOGGER.log(Level.INFO, "SQL Query " + statement);
             ResultSet rs = statement.executeQuery();
             */
 
             while (rs.next()) {
                 users1.add(new User(rs.getLong("id"), rs.getString("name"), rs.getString("description"), rs.getString("tenant_id")));
             }
+            return users1;
         });
         return users;
     }
