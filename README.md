@@ -4,6 +4,7 @@ Java Spring Vulny is a simple application that combines the power and sophistica
 homegrown naïveté. Its purpose is to provide a target for web application security test scanners 
 such as [OWASP ZAProxy](https://www.zaproxy.org/) and [StackHawk](https://www.stackhawk.com/).
 
+
 Most of the configuration options for StackHawk can be found under the stackhawk.d directory.
 
 ## Building and Running in Docker
