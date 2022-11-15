@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-test:
-    name: Build and test
+  stackhawk-hawkscan:
+    name: Runs the application and the HawkScan test of the app
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Build and Run Vulny!
         run: docker-compose build && docker-compose up -d
       - name: HawkScan
