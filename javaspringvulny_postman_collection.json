@@ -158,7 +158,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInRlbmFudElkIjoiMTIzNDU2NyIsImlhdCI6MTY2Mzk1NDY4OSwiZXhwIjoxNjYzOTU4Mjg5fQ.dnCsM7wKsasVj-rTtj_rffMDfVlOZxoQziE6VKpv0D4",
+													"value": "",
 													"type": "string"
 												}
 											]
@@ -332,6 +332,16 @@
 								{
 									"name": "search 2",
 									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
 										"method": "GET",
 										"header": [
 											{
@@ -354,7 +364,7 @@
 											"variable": [
 												{
 													"key": "text",
-													"value": "ea nisi venia",
+													"value": "items",
 													"description": "(Required) "
 												}
 											]
@@ -400,6 +410,71 @@
 											"body": "ea nisi venia"
 										}
 									]
+								}
+							]
+						},
+						{
+							"name": "admin",
+							"item": [
+								{
+									"name": "freeHosen",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/jwt/admin/freeHosen",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"jwt",
+												"admin",
+												"freeHosen"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "freeHosen",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/jwt/admin/freeHosen",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"jwt",
+												"admin",
+												"freeHosen"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
@@ -759,16 +834,6 @@
 			]
 		}
 	],
-	"auth": {
-		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInRlbmFudElkIjoiMTIzNDU2NyIsImlhdCI6MTY2Mzk1MzM2OCwiZXhwIjoxNjYzOTU2OTY4fQ.UzEiOz6MvfyN4-JSA23ue_xtGSkqtbNW5kpiFGCh_F4",
-				"type": "string"
-			}
-		]
-	},
 	"event": [
 		{
 			"listen": "prerequest",
