@@ -1,11 +1,11 @@
 app:
-  applicationId: ${APP_ID:44d63acb-a50b-4ab5-baa3-9508bb12691f}
+  applicationId: ${APP_ID:52565685-666d-4da7-b9d2-034af780217c}
   env: ${APP_ENV:custom-test}
   host: ${APP_HOST:https://localhost:9000}
   excludePaths:
     - "/logout"
-#  openApiConf:
-#    path: /openapi
+  openApiConf:
+    path: /openapi
   authentication:
     usernamePassword:
       type: JSON
