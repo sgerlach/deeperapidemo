@@ -45,10 +45,10 @@ app:
 
 hawk:
   failureThreshold: high
+  spider:
+    base: false
 
 hawkAddOn:
-  spider: false
-  maxDurationMinutes: 10
   scripts:
     - name: api1:2019-tennant-check.js
       id: 1000012
