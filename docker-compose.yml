@@ -12,7 +12,6 @@ services:
   javavulny:
     build: .
     image: stackhawk/javavulny:latest
-    container_name: javavulny
     environment:
       SPRING_PROFILES_ACTIVE: postgresql
     ports:
