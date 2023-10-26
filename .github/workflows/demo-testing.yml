@@ -4,6 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
+  snyk-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Snyk Code
+        uses: snyk/actions/gradle-jdk17@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   stackhawk-hawkscan:
     name: Runs the application and the HawkScan test of the app
     runs-on: ubuntu-latest
