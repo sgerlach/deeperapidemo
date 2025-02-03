@@ -15,7 +15,7 @@ jobs:
       - name: Checkout vulny repo
         run: git clone https://github.com/${{ github.event.client_payload.repoOrg }}/${{ github.event.client_payload.repoName }}.git
       - name: Run ${{ github.event.client_payload.repoName }}
-        run: docker-compose up -d
+        run: docker compose up -d
       - name: Navigate to repo root directory
         run: cd /home/runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
       - name: Run HawkScan
