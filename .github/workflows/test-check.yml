@@ -11,6 +11,9 @@ on:
         description: 'Path to stackhawk.yml config file'
         required: false
         default: 'stackhawk.yml'
+      application-id:
+        description: 'The StackHawk Application ID of this applicaiton'
+        default: ''
 
 jobs:
   get-scan:
@@ -22,7 +25,7 @@ jobs:
       - name: Get latest StackHawk scan for commit
         id: get-scan
         env:
-          STACKHAWK_API_KEY: ${{ secrets.STACKHAWK_API_KEY }}
+          STACKHAWK_API_KEY: ${{ secrets.HAWK_API_KEY }}
           CONFIG_PATH: ${{ github.event.inputs.config-path || 'stackhawk.yml' }}
           INPUT_APP_ID: ${{ github.event.inputs.application-id }}
         run: |
