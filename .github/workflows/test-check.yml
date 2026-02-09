@@ -59,8 +59,8 @@ jobs:
           # Get SHA if not provided
           SHA="${{ github.event.inputs.sha }}"
           if [ -z "$SHA" ]; then
-            SHA=$(git rev-parse HEAD)
-            echo "Using current HEAD SHA: $SHA"
+            SHA="${{ github.sha }}"
+            echo "Using GitHub event SHA: $SHA"
           fi
           
           # Authenticate
