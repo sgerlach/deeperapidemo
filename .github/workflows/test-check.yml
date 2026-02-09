@@ -11,10 +11,6 @@ on:
         description: 'Path to stackhawk.yml config file'
         required: false
         default: 'stackhawk.yml'
-      application-id:
-        description: 'The StackHawk Application ID for this application'
-        required: false
-        default: '44d63acb-a50b-4ab5-baa3-9508bb12691f'
 
 jobs:
   get-scan:
@@ -26,26 +22,33 @@ jobs:
       - name: Get latest StackHawk scan for commit
         id: get-scan
         env:
-          STACKHAWK_API_KEY: ${{ secrets.HAWK_API_KEY }}
+          STACKHAWK_API_KEY: ${{ secrets.STACKHAWK_API_KEY }}
           CONFIG_PATH: ${{ github.event.inputs.config-path || 'stackhawk.yml' }}
+          INPUT_APP_ID: ${{ github.event.inputs.application-id }}
         run: |
           set -e
           
-          # Extract app ID from stackhawk.yml
-          if [ ! -f "$CONFIG_PATH" ]; then
-            echo "::error::Config file not found: $CONFIG_PATH"
-            exit 1
+          # Get app ID from input or config file
+          if [ -n "$INPUT_APP_ID" ]; then
+            APP_ID="$INPUT_APP_ID"
+            echo "Using application ID from input: $APP_ID"
+          else
+            # Extract app ID from stackhawk.yml
+            if [ ! -f "$CONFIG_PATH" ]; then
+              echo "::error::Config file not found: $CONFIG_PATH"
+              exit 1
+            fi
+            
+            echo "Extracting application ID from $CONFIG_PATH..."
+            APP_ID=$(yq eval '.app.applicationId' "$CONFIG_PATH")
+            
+            if [ -z "$APP_ID" ] || [ "$APP_ID" = "null" ]; then
+              echo "::error::Could not find app.applicationId in $CONFIG_PATH"
+              exit 1
+            fi
+            
+            echo "Application ID from config: $APP_ID"
           fi
-          
-          echo "Extracting application ID from $CONFIG_PATH..."
-          APP_ID=$(yq eval '.app.applicationId' "$CONFIG_PATH")
-          
-          if [ -z "$APP_ID" ] || [ "$APP_ID" = "null" ]; then
-            echo "::error::Could not find app.applicationId in $CONFIG_PATH"
-            exit 1
-          fi
-          
-          echo "Application ID: $APP_ID"
           
           # Get SHA if not provided
           SHA="${{ github.event.inputs.sha }}"
@@ -56,9 +59,9 @@ jobs:
           
           # Authenticate
           echo "Authenticating with StackHawk API..."
-          AUTH_RESPONSE=$(curl -s -X POST https://api.stackhawk.com/api/v1/auth/key \
+          AUTH_RESPONSE=$(curl -s -X POST https://api.stackhawk.com/api/v1/auth/login \
             -H "Content-Type: application/json" \
-            -d "{\"key\":\"$STACKHAWK_API_KEY\"}")
+            -H "X-ApiKey: $STACKHAWK_API_KEY")
           
           TOKEN=$(echo "$AUTH_RESPONSE" | jq -r '.token')
           ORG_ID=$(echo "$AUTH_RESPONSE" | jq -r '.orgId')
