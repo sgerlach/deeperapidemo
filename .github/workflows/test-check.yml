@@ -62,8 +62,7 @@ jobs:
           
           # Authenticate
           echo "Authenticating with StackHawk API..."
-          AUTH_RESPONSE=$(curl -s -X POST https://api.stackhawk.com/api/v1/auth/login \
-            -H "Content-Type: application/json" \
+          AUTH_RESPONSE=$(curl -s -X GET https://api.stackhawk.com/api/v1/auth/login \
             -H "X-ApiKey: $STACKHAWK_API_KEY")
           
           TOKEN=$(echo "$AUTH_RESPONSE" | jq -r '.token')
