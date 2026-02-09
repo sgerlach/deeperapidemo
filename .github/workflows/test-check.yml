@@ -14,6 +14,9 @@ on:
       application-id:
         description: 'The StackHawk Application ID of this applicaiton'
         default: ''
+      organization-id:
+        description: 'StackHawk OrgID'
+        default: ''
 
 jobs:
   get-scan:
@@ -66,10 +69,17 @@ jobs:
             -H "X-ApiKey: $STACKHAWK_API_KEY")
           
           TOKEN=$(echo "$AUTH_RESPONSE" | jq -r '.token')
-          ORG_ID=$(echo "$AUTH_RESPONSE" | jq -r '.orgId')
+
+          # Get user info to extract org ID
+          echo "Fetching user information..."
+          USER_RESPONSE=$(curl -s -X GET https://api.stackhawk.com/api/v1/user \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Accept: application/json")
           
-          if [ "$TOKEN" = "null" ] || [ -z "$TOKEN" ]; then
-            echo "::error::Authentication failed"
+          ORG_ID=$(echo "$USER_RESPONSE" | jq -r '.user.external.organizations[0].organization.id')
+          
+          if [ "$ORG_ID" = "null" ] || [ -z "$ORG_ID" ]; then
+            echo "::error::Could not determine organization ID"
             exit 1
           fi
           
