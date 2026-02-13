@@ -30,8 +30,6 @@ app:
 hawk:
   spider:
     base: false
-    postmanConfig:
-      filePath: javaspringvulny_postman_collection.json
   failureThreshold: high
 hawkAddOn:
   scripts:
@@ -40,4 +38,3 @@ hawkAddOn:
       type: active
       path: stackhawk.d
       language: JAVASCRIPT
-  spider: false

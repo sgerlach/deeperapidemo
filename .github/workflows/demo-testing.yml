@@ -1,30 +1,30 @@
 name: Build and Test
 on:
   pull_request:
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
-    name: Build and test
+  snyk-code:
     runs-on: ubuntu-latest
-    services:
-      postgres-db:
-        image: postgres
-        ports:
-          - 5432:5432
+    steps:
+      - uses: actions/checkout@master
+      - name: Snyk Code
+        uses: snyk/actions/gradle@master
         env:
-          POSTGRES_DB: postgresql
-          POSTGRES_USER: postgresql
-          POSTGRES_PASSWORD: postgresql
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  stackhawk-hawkscan:
+    name: Runs the application and the HawkScan test of the app
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Build and Run Vulny!
         run: docker-compose build && docker-compose up -d
       - name: HawkScan
         uses: stackhawk/hawkscan-action@v2.0.0
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
-          configurationFiles: stackhawk.d/stackhawk-custom-params.yml stackhawk-github-pr.yml
+          configurationFiles: stackhawk.d/stackhawk-custom-params.yml stackhawk.d/stackhawk-github-pr.yml
         env:
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           BRANCH_NAME: ${{ github.head_ref }}
